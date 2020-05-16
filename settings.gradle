@@ -1,0 +1,2 @@
+rootProject.name='Space Weather Library'
+include ':library'
