@@ -17,11 +17,10 @@ interface SpaceWeatherApi {
     @GET("data/v3/forecast/3day_data.json")
     suspend fun getForecast3Day(@Query("force") string: String): ForecastData
 
-    //    @GET("swpc/goes/latest_metadata.json")
-//    suspend fun getXRayImageMetadata(@Query("force") string: String): XRayImageMetadata
+    @GET("swpc/goes/latest_metadata.json")
+    suspend fun getXRayImageMetadata(@Query("force") string: String): XRayImageMetadata
 
-
-//    @Serializable data class XRayImageMetadata(val pthna04: Long)
+    @Serializable data class XRayImageMetadata(val pthna04: Long)
     @Serializable data class XRayFluxData(val allData: Map<Long, Double>, val last6HoursData: Map<Long, Double>)
     @Serializable data class ForecastData(
         val radiation: List<ForecastRadiationData>,
