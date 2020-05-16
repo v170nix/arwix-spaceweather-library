@@ -12,7 +12,7 @@ import net.arwix.spaceweather.library.xray.data.XRayData.Companion.MODE_1
 import net.arwix.spaceweather.library.xray.data.XRayData.Companion.MODE_5
 
 
-class XRayChartRepository(
+class XRayRepository(
     private val api: SpaceWeatherApi,
     private val dao: XRayDao,
     private val updateCheckerData: UpdateCheckerData
