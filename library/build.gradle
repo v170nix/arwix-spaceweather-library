@@ -1,5 +1,5 @@
 apply plugin: 'com.github.dcendents.android-maven'
-group='net.arwix.spaceweather.library'
+group='com.github.v170nix:arwix-spaceweather-library'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'kotlin-android'

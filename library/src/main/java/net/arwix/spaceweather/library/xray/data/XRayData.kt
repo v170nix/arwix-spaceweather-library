@@ -2,20 +2,21 @@ package net.arwix.spaceweather.library.xray.data
 
 import androidx.room.Entity
 import androidx.room.Ignore
+import net.arwix.spaceweather.library.data.WeatherSWPCData
 import kotlin.math.log10
 
 
 @Entity(tableName = "x_ray_flux_table", primaryKeys = ["time", "mode"])
 data class XRayData(
-    val time: Long,
-    val value: Double,
-    val mode: Int) {
+    override val time: Long,
+    override val value: Double,
+    val mode: Int): WeatherSWPCData {
 
     @Ignore
     fun getFloatIndex() = log10(value.toFloat()).takeIf { !it.isNaN() } ?: -9.5f
 
     @Ignore
-    fun getIntIndex(): Int = getFloatIndex().let {
+    override fun getIntIndex(): Int = getFloatIndex().let {
         if (it < R1) return@let 0
         if (it >= R5) return@let 5
         if (it < R2) return@let 1

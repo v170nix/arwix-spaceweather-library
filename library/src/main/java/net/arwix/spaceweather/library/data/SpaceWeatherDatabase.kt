@@ -15,7 +15,7 @@ import net.arwix.spaceweather.library.xray.data.XRayData
         XRayData::class,
         ProtonData::class
     ],
-    version = 310
+    version = 311
 )
 abstract class SpaceWeatherDatabase : RoomDatabase() {
     abstract fun getGeomagneticDao(): GeomagneticDao
