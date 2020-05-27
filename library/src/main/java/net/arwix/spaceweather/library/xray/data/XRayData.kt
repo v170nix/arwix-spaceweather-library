@@ -5,7 +5,6 @@ import androidx.room.Ignore
 import net.arwix.spaceweather.library.data.WeatherSWPCData
 import kotlin.math.log10
 
-
 @Entity(tableName = "x_ray_flux_table", primaryKeys = ["time", "mode"])
 data class XRayData(
     override val time: Long,

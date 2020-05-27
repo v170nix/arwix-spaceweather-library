@@ -24,4 +24,17 @@ abstract class ProtonDao {
 
     fun getAllDataDistinctUntilChanged(count: Int) = getAllData(count).distinctUntilChanged()
 
+    /**
+     * @param list - reversed list
+     */
+    fun chunkedToBar(list: List<ProtonData>): List<ProtonData> {
+        val innerData = list.dropWhile { it.time % 10800 != 0L }
+        val groups = innerData.chunked(36)
+        return groups.asSequence().map { item ->
+            ProtonData(
+                time = item.first().time,
+                value = item.maxBy { it.value }!!.value
+            )
+        }.toList()
+    }
 }

@@ -1,6 +1,7 @@
 package net.arwix.spaceweather.library.data
 
 import kotlinx.serialization.Serializable
+import net.arwix.spaceweather.library.xray.data.XRayFlareEventData
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -20,17 +21,31 @@ interface SpaceWeatherApi {
     @GET("swpc/goes/latest_metadata.json")
     suspend fun getXRayImageMetadata(@Query("force") string: String): XRayImageMetadata
 
-    @Serializable data class XRayImageMetadata(val pthna04: Long)
-    @Serializable data class XRayFluxData(val allData: Map<Long, Double>, val last6HoursData: Map<Long, Double>)
-    @Serializable data class ForecastData(
+    @Serializable
+    data class XRayImageMetadata(val pthna04: Long)
+
+    @Serializable
+    data class XRayFluxData(
+        val lastEvent: XRayFlareEventData,
+        val allData: Map<Long, Double>,
+        val last6HoursData: Map<Long, Double>
+    )
+
+    @Serializable
+    data class ForecastData(
         val radiation: List<ForecastRadiationData>,
         val x_ray: List<ForecastXRayData>,
         val geomagnetic: List<ForecastGeoData>
     )
 
-    @Serializable data class ForecastRadiationData(val date: String, val percent: Byte)
-    @Serializable data class ForecastXRayData(val date: String, val percent_m: Byte, val percent_x: Byte)
-    @Serializable data class ForecastGeoData(
+    @Serializable
+    data class ForecastRadiationData(val date: String, val percent: Byte)
+
+    @Serializable
+    data class ForecastXRayData(val date: String, val percent_m: Byte, val percent_x: Byte)
+
+    @Serializable
+    data class ForecastGeoData(
         val date: String,
         val percent_active: Byte,
         val percent_minor_storm: Byte,
