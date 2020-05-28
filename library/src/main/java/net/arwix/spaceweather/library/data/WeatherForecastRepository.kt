@@ -3,8 +3,8 @@ package net.arwix.spaceweather.library.data
 import android.content.SharedPreferences
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.createRandomString
-import org.threeten.bp.ZoneId
-import org.threeten.bp.ZonedDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class WeatherForecastRepository(
     private val api: SpaceWeatherApi,

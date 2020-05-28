@@ -1,7 +1,7 @@
 package net.arwix.spaceweather.library.common
 
 import android.content.SharedPreferences
-import org.threeten.bp.Instant
+import java.time.Instant
 
 class UpdateCheckerData(
     private val preferences: SharedPreferences,
