@@ -23,18 +23,4 @@ interface GeomagneticDao {
 
     fun getAllDataDistinctUntilChanged( count: Int) = getAllData(count).distinctUntilChanged()
 
-    /**
-     * @param list - reversed list
-     */
-    fun chunkedToBar(list: List<KpIndexData>): List<KpIndexData> {
-        val innerData = list.dropWhile { it.time % 10800 != 0L }
-        val groups = innerData.chunked(36)
-        return groups.asSequence().map { item ->
-            KpIndexData(
-                time = item.first().time,
-                value = item.maxBy { it.value }!!.value
-            )
-        }.toList()
-    }
-
 }
