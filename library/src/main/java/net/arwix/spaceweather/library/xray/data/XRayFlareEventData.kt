@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
 data class XRayFlareEventData(
     @PrimaryKey val beginTime: Long,
     val beginClass: String,
-    val maxTime: Long,
-    val maxClass: String,
+    val maxTime: Long?,
+    val maxClass: String?,
     val endTime: Long?,
     val endClass: String?
 )
