@@ -22,5 +22,4 @@ interface GeomagneticDao {
     }
 
     fun getAllDataDistinctUntilChanged( count: Int) = getAllData(count).distinctUntilChanged()
-
 }
