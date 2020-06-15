@@ -18,6 +18,9 @@ interface SpaceWeatherApi {
     @GET("data/v3/solar_wind/plasma.json")
     suspend fun getSolarWindPlasma(@Query("force") string: String): Map<Long, List<Double>>
 
+    @GET("data/v3/hemi/power.json")
+    suspend fun getHemisphericPower(@Query("force") string: String): Map<Long, List<Int>>
+
     @GET("data/v3/forecast/3day_data.json")
     suspend fun getForecast3Day(@Query("force") string: String): ForecastData
 
