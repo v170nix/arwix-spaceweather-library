@@ -7,9 +7,13 @@ import kotlinx.serialization.Serializable
 
 @Keep
 @Serializable
-@Entity(tableName = "solar_wind_plasma_table")
-data class SolarWindPlasmaData(
+@Entity(tableName = "solar_wind_table")
+data class SolarWindData(
     @PrimaryKey val time: Long,
     val density: Double,
     val speed: Double,
-    val temperature: Double)
+    val temperature: Double,
+    val bx: Double?,
+    val by: Double?,
+    val bz: Double?,
+    val bt: Double?)

@@ -17,8 +17,14 @@ class SolarWindRepository(
         if (!force && !updateCheckerData.isUpdateTime(1L * 60L)) return UpdateCheckerData.UpdateResult.IsNotUpdateTime
         runCatching {
             val q = if (force) createRandomString() else ""
-            api.getSolarWindPlasma(q).map {
-                SolarWindPlasmaData(it.key * 10L, it.value[0], it.value[1], it.value[2])
+            api.getSolarWindPlasma(q).map { (time, value) ->
+                SolarWindData(
+                    time * 10L, value[0], value[1], value[2],
+                    value.getOrNull(3),
+                    value.getOrNull(4),
+                    value.getOrNull(5),
+                    value.getOrNull(6)
+                )
             }
         }.onSuccess {
             withContext(Dispatchers.IO) { solarWindDao.deleteAndInserts(it) }
@@ -30,7 +36,7 @@ class SolarWindRepository(
         throw IllegalStateException()
     }
 
-    fun getFlow(count: Int = 1440 * 3): Flow<List<SolarWindPlasmaData>> =
+    fun getFlow(count: Int = 1440 * 3): Flow<List<SolarWindData>> =
         solarWindDao.getAllDataDistinctUntilChanged(count).filter { it.isNotEmpty() }
 
 }
