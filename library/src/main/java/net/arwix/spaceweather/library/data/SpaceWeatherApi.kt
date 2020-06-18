@@ -27,6 +27,12 @@ interface SpaceWeatherApi {
     @GET("swpc/goes/latest_metadata.json")
     suspend fun getXRayImageMetadata(@Query("force") string: String): XRayImageMetadata
 
+    @GET("swpc/lasco/latest_metadata.json")
+    suspend fun getLASCOImageMetadata(): LASCOImageMetadata
+
+    @Serializable
+    data class LASCOImageMetadata(val lasco2Time: Long, val lasco3Time: Long)
+
     @Serializable
     data class XRayImageMetadata(val pthna04: Long)
 
