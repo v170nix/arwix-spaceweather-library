@@ -18,7 +18,7 @@ class HemisphericRepository(
         runCatching {
             val q = if (force) createRandomString() else ""
             api.getHemisphericPower(q).map { (time, value) ->
-                HemisphericPowerData(time, value[0], value[1])
+                HemisphericPowerData(time * 10L, value[0], value[1])
             }
         }.onSuccess {
             withContext(Dispatchers.IO) { hemisphericDao.deleteAndInserts(it) }
