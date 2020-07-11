@@ -2,7 +2,7 @@ package net.arwix.spaceweather.library.domain
 
 import net.arwix.spaceweather.library.data.WeatherSWPCData
 
-abstract class WeatherAlertChecker<T: WeatherSWPCData> {
+abstract class AlertChecker<T: WeatherSWPCData> {
 
     protected abstract fun saveCurrentAlert(data: T)
     protected abstract fun getPreviousAlert(): T?
