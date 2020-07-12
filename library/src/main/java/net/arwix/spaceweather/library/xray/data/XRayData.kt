@@ -1,5 +1,6 @@
 package net.arwix.spaceweather.library.xray.data
 
+import androidx.annotation.IntRange
 import androidx.room.Entity
 import androidx.room.Ignore
 import net.arwix.spaceweather.library.data.WeatherSWPCData
@@ -15,6 +16,7 @@ data class XRayData(
     fun getFloatIndex() = log10(value.toFloat()).takeIf { !it.isNaN() } ?: -9.5f
 
     @Ignore
+    @IntRange(from = 0L, to = 5L)
     override fun getIntIndex(): Int = getFloatIndex().let {
         if (it < R1) return@let 0
         if (it >= R5) return@let 5

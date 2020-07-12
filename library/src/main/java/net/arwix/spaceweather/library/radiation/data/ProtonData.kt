@@ -1,5 +1,6 @@
 package net.arwix.spaceweather.library.radiation.data
 
+import androidx.annotation.IntRange
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -15,5 +16,6 @@ data class ProtonData constructor(
     fun getFloatIndex() = log10(value.toFloat()).takeIf { !it.isNaN() } ?: -1f
 
     @Ignore
+    @IntRange(from = 0L, to = 5L)
     override fun getIntIndex() = (getFloatIndex().takeIf { it <= 5f } ?: 5f).toInt()
 }
