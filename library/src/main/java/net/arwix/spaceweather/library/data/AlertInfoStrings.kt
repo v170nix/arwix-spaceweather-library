@@ -12,6 +12,6 @@ class AlertInfoStrings(resources: Resources) {
         ref.get()?.getStringArray(R.array.space_weather_status_info)
     }
 
-    fun geInfo(@IntRange(from = 0L, to = 5) index: Int) = infoStrings?.getOrNull(index)
+    fun getInfo(@IntRange(from = 0L, to = 5) index: Int) = infoStrings?.getOrNull(index)
 
 }

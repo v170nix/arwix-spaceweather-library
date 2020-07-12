@@ -1,9 +1,11 @@
 package net.arwix.spaceweather.library.geomagnetic.data
 
 import android.content.res.Resources
+import androidx.annotation.IntRange
 import net.arwix.extension.weak
 import net.arwix.spaceweather.library.R
 
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class GeomagneticStrings(resources: Resources) {
 
     private val ref = resources.weak()
@@ -30,11 +32,18 @@ class GeomagneticStrings(resources: Resources) {
         ref.get()?.getString(R.string.space_weather_geomagnetic_other_title)
     }
 
-    fun getStormStrings(kpIndex: KpIndexData): GeomagneticStormStrings? {
-        val index = kpIndex.getIntIndex() - 5
+    fun getStormStrings(data: KpIndexData): GeomagneticStormStrings? =
+        getStormStrings(data.getIntIndex())
+
+    fun getStormStrings(@IntRange(from = 0L, to = 9L) kpIndex: Int): GeomagneticStormStrings? {
+        val index = kpIndex - 5
         if (index < 0 || index > 4) return null
         return runCatching {
-            GeomagneticStormStrings(powerStrings!![index], spacecraftStrings!![index], otherStrings!![index])
+            GeomagneticStormStrings(
+                powerStrings!![index],
+                spacecraftStrings!![index],
+                otherStrings!![index]
+            )
         }.getOrNull()
     }
 

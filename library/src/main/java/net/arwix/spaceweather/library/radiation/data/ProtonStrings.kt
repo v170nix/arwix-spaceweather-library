@@ -1,9 +1,11 @@
 package net.arwix.spaceweather.library.radiation.data
 
 import android.content.res.Resources
+import androidx.annotation.IntRange
 import net.arwix.extension.weak
 import net.arwix.spaceweather.library.R
 
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class ProtonStrings(resources: Resources) {
 
     private val ref = resources.weak()
@@ -30,8 +32,10 @@ class ProtonStrings(resources: Resources) {
         ref.get()?.getString(R.string.space_weather_geomagnetic_other_title)
     }
 
-    fun getStormStrings(data: ProtonData): RadiationStormStrings? {
-        val index = data.getIntIndex() - 1
+    fun getStormStrings(data: ProtonData): RadiationStormStrings? = getStormStrings(data.getIntIndex())
+
+    fun getStormStrings(@IntRange(from = 0L, to = 5L) protonIndex: Int): RadiationStormStrings? {
+        val index = protonIndex - 1
         if (index < 0 || index > 4) return null
         return runCatching {
             RadiationStormStrings(biologicalStrings!![index], satelliteStrings!![index], otherStrings!![index])

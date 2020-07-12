@@ -1,10 +1,11 @@
 package net.arwix.spaceweather.library.xray.data
 
 import android.content.res.Resources
+import androidx.annotation.IntRange
 import net.arwix.extension.weak
 import net.arwix.spaceweather.library.R
-import net.arwix.spaceweather.library.radiation.data.ProtonData
 
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 class XRayStrings(resources: Resources) {
 
     private val ref = resources.weak()
@@ -24,8 +25,10 @@ class XRayStrings(resources: Resources) {
         ref.get()?.getString(R.string.space_weather_radio_blackout_hf_radio_title)
     }
 
-    fun getBlackoutStrings(data: XRayData): RadioBlackoutStrings? {
-        val index = data.getIntIndex() - 1
+    fun getBlackoutStrings(data: XRayData): RadioBlackoutStrings?  = getBlackoutStrings(data.getIntIndex())
+
+    fun getBlackoutStrings(@IntRange(from = 0L, to = 5L) xRayIndex: Int): RadioBlackoutStrings? {
+        val index = xRayIndex - 1
         if (index < 0 || index > 4) return null
         return runCatching {
             RadioBlackoutStrings(
