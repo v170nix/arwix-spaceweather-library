@@ -24,7 +24,8 @@ import net.arwix.spaceweather.library.xray.data.XRayFlareEventData
         SolarWindData::class,
         HemisphericPowerData::class
     ],
-    version = 314
+    version = 314,
+    exportSchema = false
 )
 abstract class SpaceWeatherDatabase : RoomDatabase() {
     abstract fun getGeomagneticDao(): GeomagneticDao
