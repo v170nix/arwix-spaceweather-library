@@ -3,6 +3,7 @@
 
     <string-array name="space_weather_status_info">
         <item>Is quiet</item>
+        <item>Active</item>
         <item>Minor</item>
         <item>Moderate</item>
         <item>Strong</item>

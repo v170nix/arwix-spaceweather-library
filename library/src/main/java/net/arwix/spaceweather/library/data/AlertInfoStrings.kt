@@ -12,6 +12,23 @@ class AlertInfoStrings(resources: Resources) {
         ref.get()?.getStringArray(R.array.space_weather_status_info)
     }
 
-    fun getInfo(@IntRange(from = 0L, to = 5) index: Int) = infoStrings?.getOrNull(index)
+    fun getGeomagneticInfo(@IntRange(from = 0L, to = 9L) index: Int): String? {
+        val innerIndex = (index - 3).takeIf { it > 0 } ?: 0
+        return infoStrings?.getOrNull(innerIndex)
+    }
+
+    fun getRadiationInfo(@IntRange(from = 0L, to = 5L) index: Int): String? {
+        return when (index) {
+            0 -> infoStrings?.getOrNull(0)
+            else -> infoStrings?.getOrNull(index + 1)
+        }
+    }
+
+    fun getRadioBlackoutInfo(@IntRange(from = 0L, to = 5L) index: Int): String? {
+        return when (index) {
+            0 -> infoStrings?.getOrNull(0)
+            else -> infoStrings?.getOrNull(index + 1)
+        }
+    }
 
 }
