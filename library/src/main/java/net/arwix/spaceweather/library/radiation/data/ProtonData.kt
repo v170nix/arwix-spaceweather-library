@@ -17,5 +17,8 @@ data class ProtonData constructor(
 
     @Ignore
     @IntRange(from = 0L, to = 5L)
-    override fun getIntIndex() = (getFloatIndex().takeIf { it <= 5f } ?: 5f).toInt()
+    override fun getIntIndex() = (
+            getFloatIndex().takeIf { it <= 5f } ?: 5f
+            ).toInt().takeIf { it > -1 } ?: 0
+
 }
