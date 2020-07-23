@@ -8,27 +8,25 @@ import net.arwix.spaceweather.library.R
 class AlertInfoStrings(resources: Resources) {
     private val ref = resources.weak()
 
-    private val infoStrings by lazy(LazyThreadSafetyMode.NONE) {
-        ref.get()?.getStringArray(R.array.space_weather_status_info)
+    private val infoGeoStrings by lazy(LazyThreadSafetyMode.NONE) {
+        ref.get()?.getStringArray(R.array.space_weather_geomagnetic_status_info)
     }
 
-    fun getGeomagneticInfo(@IntRange(from = 0L, to = 9L) index: Int): String? {
-        val innerIndex = (index - 3).takeIf { it > 0 } ?: 0
-        return infoStrings?.getOrNull(innerIndex)
+    private val infoRadiationStrings by lazy(LazyThreadSafetyMode.NONE) {
+        ref.get()?.getStringArray(R.array.space_weather_radiation_status_info)
     }
 
-    fun getRadiationInfo(@IntRange(from = 0L, to = 5L) index: Int): String? {
-        return when (index) {
-            0 -> infoStrings?.getOrNull(0)
-            else -> infoStrings?.getOrNull(index + 1)
-        }
+    private val infoBlackoutStrings by lazy(LazyThreadSafetyMode.NONE) {
+        ref.get()?.getStringArray(R.array.space_weather_radio_blackout_status_info)
     }
 
-    fun getRadioBlackoutInfo(@IntRange(from = 0L, to = 5L) index: Int): String? {
-        return when (index) {
-            0 -> infoStrings?.getOrNull(0)
-            else -> infoStrings?.getOrNull(index + 1)
-        }
-    }
+    fun getGeomagneticInfo(@IntRange(from = 0L, to = 9L) index: Int) =
+        infoGeoStrings?.getOrNull(index)
+
+    fun getRadiationInfo(@IntRange(from = 0L, to = 5L) index: Int) =
+        infoRadiationStrings?.getOrNull(index)
+
+    fun getRadioBlackoutInfo(@IntRange(from = 0L, to = 5L) index: Int) =
+        infoBlackoutStrings?.getOrNull(index)
 
 }

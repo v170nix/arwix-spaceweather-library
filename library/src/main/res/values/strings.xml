@@ -1,15 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="space_weather_status_info">
-        <item>Is quiet</item>
-        <item>Active</item>
-        <item>Minor</item>
-        <item>Moderate</item>
-        <item>Strong</item>
-        <item>Severe</item>
-        <item>Extreme</item>
+    <string name="space_weather_status_quiet">Quiet</string>
+    <string name="space_weather_status_unsettled">Unsettled</string>
+    <string name="space_weather_status_active_field">Active field</string>
+    <string name="space_weather_status_minor_storm">Minor storm</string>
+    <string name="space_weather_status_moderate_storm">Moderate storm</string>
+    <string name="space_weather_status_strong_storm">Strong storm</string>
+    <string name="space_weather_status_severe_storm">Severe storm</string>
+    <string name="space_weather_status_extreme_storm">Extreme storm</string>
+    <string name="space_weather_status_minor_blackout">Minor blackout</string>
+    <string name="space_weather_status_moderate_blackout">Moderate blackout</string>
+    <string name="space_weather_status_strong_blackout">Strong blackout</string>
+    <string name="space_weather_status_severe_blackout">Severe blackout</string>
+    <string name="space_weather_status_extreme_blackout">Extreme blackout</string>
+
+    <string-array name="space_weather_geomagnetic_status_info">
+        <item>@string/space_weather_status_quiet</item>
+        <item>@string/space_weather_status_quiet</item>
+        <item>@string/space_weather_status_unsettled</item>
+        <item>@string/space_weather_status_unsettled</item>
+        <item>@string/space_weather_status_active_field</item>
+        <item>@string/space_weather_status_minor_storm</item>
+        <item>@string/space_weather_status_moderate_storm</item>
+        <item>@string/space_weather_status_strong_storm</item>
+        <item>@string/space_weather_status_severe_storm</item>
+        <item>@string/space_weather_status_extreme_storm</item>
     </string-array>
+
+    <string-array name="space_weather_radiation_status_info">
+        <item>@string/space_weather_status_quiet</item>
+        <item>@string/space_weather_status_minor_storm</item>
+        <item>@string/space_weather_status_moderate_storm</item>
+        <item>@string/space_weather_status_strong_storm</item>
+        <item>@string/space_weather_status_severe_storm</item>
+        <item>@string/space_weather_status_extreme_storm</item>
+    </string-array>
+
+    <string-array name="space_weather_radio_blackout_status_info">
+        <item>@string/space_weather_status_quiet</item>
+        <item>@string/space_weather_status_minor_blackout</item>
+        <item>@string/space_weather_status_moderate_blackout</item>
+        <item>@string/space_weather_status_strong_blackout</item>
+        <item>@string/space_weather_status_severe_blackout</item>
+        <item>@string/space_weather_status_extreme_blackout</item>
+    </string-array>
+
+    <string name="space_weather_forecast">Forecast</string>
+    <string name="space_weather_forecast_percent_description">Probabilities in percent</string>
+
+
+    <string name="space_weather_geomagnetic_activity">Geomagnetic activity</string>
+    <string name="space_weather_kp_index">Kp index</string>
 
     <string name="space_weather_other_systems_text">Other systems</string>
 
