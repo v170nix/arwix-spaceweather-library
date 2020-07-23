@@ -47,7 +47,7 @@
     </string-array>
 
     <string name="space_weather_forecast">Forecast</string>
-    <string name="space_weather_forecast_percent_description">Probabilities in percent</string>
+    <string name="space_weather_forecast_percent_description">Probabilities</string>
 
 
     <string name="space_weather_geomagnetic_activity">Geomagnetic activity</string>
