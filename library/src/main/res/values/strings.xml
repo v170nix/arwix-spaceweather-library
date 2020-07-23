@@ -56,7 +56,7 @@
     <string name="space_weather_other_systems_text">Other systems</string>
 
     <string name="space_weather_status_current">Current</string>
-    <string name="space_weather_status_24Hour">24-Hour</string>
+    <string name="space_weather_status_24Hour">Last 24 hours</string>
 
     <string name="space_weather_geomagnetic_status_title">Geomagnetic Storm</string>
     <string name="space_weather_geomagnetic_power_system_title">Power systems</string>
