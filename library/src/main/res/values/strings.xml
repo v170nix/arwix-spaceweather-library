@@ -46,6 +46,10 @@
         <item>@string/space_weather_status_extreme_blackout</item>
     </string-array>
 
+    <string name="space_weather_aurora_power_north">North</string>
+    <string name="space_weather_aurora_power_south">South</string>
+    <string name="space_weather_aurora_power_gw">%1$d GW</string>
+
     <string name="space_weather_forecast">Forecast</string>
     <string name="space_weather_forecast_percent_description">Probabilities</string>
 
