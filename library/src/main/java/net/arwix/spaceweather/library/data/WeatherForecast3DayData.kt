@@ -1,5 +1,6 @@
 package net.arwix.spaceweather.library.data
 
+import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -7,6 +8,7 @@ import kotlinx.serialization.json.JsonConfiguration
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Keep
 @Serializable
 class WeatherForecast3DayData constructor(
     val geomagnetic: Array<WeatherForecastItem.GeoItem>,
@@ -41,11 +43,12 @@ class WeatherForecast3DayData constructor(
     }
 }
 
+@Keep
 @Serializable
 sealed class WeatherForecastItem(@SerialName("item_time")open val time: Long) {
-    @Serializable data class RadiationItem(override val time: Long, val percent: Byte): WeatherForecastItem(time)
-    @Serializable data class XRayItem(override val time: Long, val mPercent: Byte, val xPercent: Byte): WeatherForecastItem(time)
-    @Serializable data class GeoItem(
+    @Keep @Serializable data class RadiationItem(override val time: Long, val percent: Byte): WeatherForecastItem(time)
+    @Keep @Serializable data class XRayItem(override val time: Long, val mPercent: Byte, val xPercent: Byte): WeatherForecastItem(time)
+    @Keep @Serializable data class GeoItem(
         override val time: Long,
         val activePercent: Byte,
         val minorPercent: Byte,

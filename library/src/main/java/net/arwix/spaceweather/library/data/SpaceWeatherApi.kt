@@ -1,5 +1,6 @@
 package net.arwix.spaceweather.library.data
 
+import androidx.annotation.Keep
 import kotlinx.serialization.Serializable
 import net.arwix.spaceweather.library.xray.data.XRayFlareEventData
 import retrofit2.http.GET
@@ -30,12 +31,15 @@ interface SpaceWeatherApi {
     @GET("swpc/lasco/latest_metadata.json")
     suspend fun getLASCOImageMetadata(): LASCOImageMetadata
 
+    @Keep
     @Serializable
     data class LASCOImageMetadata(val lasco2Time: Long, val lasco3Time: Long)
 
+    @Keep
     @Serializable
     data class XRayImageMetadata(val pthna04: Long)
 
+    @Keep
     @Serializable
     data class XRayFluxData(
         val lastEvent: XRayFlareEventData,
@@ -43,6 +47,7 @@ interface SpaceWeatherApi {
         val last6HoursData: Map<Long, Double>
     )
 
+    @Keep
     @Serializable
     data class ForecastData(
         val radiation: List<ForecastRadiationData>,
@@ -50,12 +55,15 @@ interface SpaceWeatherApi {
         val geomagnetic: List<ForecastGeoData>
     )
 
+    @Keep
     @Serializable
     data class ForecastRadiationData(val date: String, val percent: Byte)
 
+    @Keep
     @Serializable
     data class ForecastXRayData(val date: String, val percent_m: Byte, val percent_x: Byte)
 
+    @Keep
     @Serializable
     data class ForecastGeoData(
         val date: String,
