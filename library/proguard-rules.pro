@@ -22,10 +22,10 @@
 ## https://github.com/Kotlin/kotlinx.serialization#androidjvm
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.SerializationKt
--keep,includedescriptorclasses class net.arwix.spaceweather.library.**$$serializer { *; }
--keepclassmembers class net.arwix.spaceweather.library.** {
+-keep,includedescriptorclasses class net.arwix.spaceweather.**$$serializer { *; }
+-keepclassmembers class net.arwix.spaceweather.* {
     *** Companion;
 }
--keepclasseswithmembers class net.arwix.spaceweather.library.** {
+-keepclasseswithmembers class net.arwix.spaceweather.* {
     kotlinx.serialization.KSerializer serializer(...);
 }
