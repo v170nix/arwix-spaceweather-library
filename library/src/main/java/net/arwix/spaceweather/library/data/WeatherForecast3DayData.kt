@@ -27,19 +27,19 @@ class WeatherForecast3DayData constructor(
         }.toTypedArray())
 
     fun toJson(): String {
-        return json.stringify(serializer(), this)
+        return json.encodeToString(serializer(), this)
     }
 
     companion object {
         private val formatter by lazy(LazyThreadSafetyMode.NONE) { SimpleDateFormat("yyyy MMM dd", Locale.ENGLISH) }
-        private val json by lazy(LazyThreadSafetyMode.NONE) { Json(JsonConfiguration.Stable) }
+        private val json by lazy(LazyThreadSafetyMode.NONE) { Json }
 
         private fun stringDateToTime(date: String): Long {
             val keys = date.split(" ").map { it.trim() }.filter { it.isNotEmpty() }
             return formatter.parse("${keys[0]} ${keys[1]} ${keys[2]}")!!.time
         }
 
-        fun fromJson(string: String): WeatherForecast3DayData = json.parse(serializer(), string) // gson.fromJson(string, WeatherForecast3DayData::class.java)
+        fun fromJson(string: String): WeatherForecast3DayData = json.decodeFromString(serializer(), string) // gson.fromJson(string, WeatherForecast3DayData::class.java)
     }
 }
 

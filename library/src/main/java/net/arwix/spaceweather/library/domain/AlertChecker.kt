@@ -19,7 +19,7 @@ abstract class AlertChecker<T: WeatherSWPCData> {
         dataArray: Array<T>,
         minDeltaTime: Long
     ) {
-        val maxElement = dataArray.maxBy { it.getIntIndex() }!!
+        val maxElement = dataArray.maxByOrNull { it.getIntIndex() } ?: return
         if (maxElement.getIntIndex() < minAlertIndex) return
 
         val (currentData, old3Data, old6Data) = dataArray

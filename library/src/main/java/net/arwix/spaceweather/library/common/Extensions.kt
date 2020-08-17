@@ -12,7 +12,7 @@ fun List<KpIndexData>.chunkKpIndexToBar(size: Int = 36): List<KpIndexData> {
     return groups.asSequence().map { item ->
         KpIndexData(
             time = item.first().time,
-            value = item.maxBy { it.value }!!.value
+            value = item.maxOf { it.value }
         )
     }.toList()
 }
@@ -23,7 +23,7 @@ fun List<ProtonData>.chunkProtonDataToBar(size: Int = 36): List<ProtonData> {
     return groups.asSequence().map { item ->
         ProtonData(
             time = item.first().time,
-            value = item.maxBy { it.value }!!.value
+            value = item.maxOf { it.value }
         )
     }.toList()
 }

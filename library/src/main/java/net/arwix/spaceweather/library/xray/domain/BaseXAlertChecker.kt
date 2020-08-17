@@ -13,14 +13,14 @@ abstract class BaseXAlertChecker(
         preferences.edit()
             .putString(
                 "WeatherAlertChecker.x_ray.flare",
-                json.stringify(XRayFlareEventData.serializer(), data)
+                json.encodeToString(XRayFlareEventData.serializer(), data)
             )
             .apply()
     }
 
     fun getPreviousAlert(): XRayFlareEventData? =
         runCatching {
-            json.parse(
+            json.decodeFromString(
                 XRayFlareEventData.serializer(),
                 preferences.getString("WeatherAlertChecker.x_ray.flare", null)!!
             )
