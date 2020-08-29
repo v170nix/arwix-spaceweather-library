@@ -5,7 +5,7 @@ import kotlinx.serialization.json.Json
 import net.arwix.spaceweather.library.domain.WeatherNotificationManager
 import net.arwix.spaceweather.library.xray.data.XRayFlareEventData
 
-abstract class NotificationXRayFlareChecker(
+open class NotificationXRayFlareChecker(
     private val preferences: SharedPreferences,
     private val notificationManager: WeatherNotificationManager
 ) {
