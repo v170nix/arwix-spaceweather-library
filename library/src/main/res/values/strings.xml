@@ -132,7 +132,6 @@
         <item>Low-frequency navigation signals used by maritime and general aviation systems experience outages on the sunlit side of the Earth for many hours, causing loss in positioning. Increased satellite navigation errors in positioning for several hours on the sunlit side of Earth, which may spread into the night side</item>
     </string-array>
 
-
     <string-array name="space_weather_radio_blackout_hf_radio">
         <item>Weak or minor degradation of HF radio communication on sunlit side, occasional loss of radio contact</item>
         <item>Limited blackout of HF radio communication on sunlit side, loss of radio contact for tens of minutes</item>
@@ -140,4 +139,30 @@
         <item>HF radio communication blackout on most of the sunlit side of Earth for one to two hours. HF radio contact lost during this time</item>
         <item>Complete HF (high frequency) radio blackout on the entire sunlit side of the Earth lasting for a number of hours. This results in no HF radio contact with mariners and en route aviators in this sector</item>
     </string-array>
+
+    <string name="space_weather_notification_channel_solar_activity">Solar activity</string>
+
+    <string name="space_weather_notification_geomagnetic_header">Geomagnetic activity</string>
+    <string-array name="space_weather_notification_geomagnetic_info">
+        <item>Active</item>
+        <item>Minor storm</item>
+        <item>Moderate storm</item>
+        <item>Strong storm</item>
+        <item>Severe storm</item>
+        <item>Extreme storm</item>
+    </string-array>
+
+    <string name="space_weather_notification_radiation_header">Solar radiation</string>
+    <string-array name="space_weather_notification_radiation_info">
+        <item>Is quiet</item>
+        <item>Minor storm</item>
+        <item>Moderate storm</item>
+        <item>Strong storm</item>
+        <item>Severe storm</item>
+        <item>Extreme storm</item>
+    </string-array>
+
+    <string name="space_weather_notification_solar_flare_header">X-ray event</string>
+    <string name="space_weather_notification_solar_flare_begin_event_context">The beginning of the solar flare</string>
+    <string name="space_weather_notification_solar_flare_context">%s class flare</string>
 </resources>
