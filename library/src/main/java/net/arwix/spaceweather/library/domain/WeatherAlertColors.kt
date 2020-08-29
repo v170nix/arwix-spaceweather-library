@@ -4,7 +4,7 @@ package net.arwix.spaceweather.library.domain
 
 import androidx.annotation.ColorInt
 
-abstract class SpaceWeatherAlertColors {
+abstract class WeatherAlertColors {
 
     enum class TypeColor { Quiet, Active, Minor, Major, Extreme }
 

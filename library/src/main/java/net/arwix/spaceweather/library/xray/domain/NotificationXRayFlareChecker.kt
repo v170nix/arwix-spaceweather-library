@@ -2,25 +2,26 @@ package net.arwix.spaceweather.library.xray.domain
 
 import android.content.SharedPreferences
 import kotlinx.serialization.json.Json
+import net.arwix.spaceweather.library.domain.WeatherNotificationManager
 import net.arwix.spaceweather.library.xray.data.XRayFlareEventData
 
-abstract class BaseXAlertChecker(
+abstract class NotificationXRayFlareChecker(
     private val preferences: SharedPreferences,
-    private val json: Json
+    private val notificationManager: WeatherNotificationManager
 ) {
 
-    fun saveCurrentAlert(data: XRayFlareEventData) {
+    private fun saveCurrentAlert(data: XRayFlareEventData) {
         preferences.edit()
             .putString(
                 "WeatherAlertChecker.x_ray.flare",
-                json.encodeToString(XRayFlareEventData.serializer(), data)
+                Json.encodeToString(XRayFlareEventData.serializer(), data)
             )
             .apply()
     }
 
-    fun getPreviousAlert(): XRayFlareEventData? =
+    private fun getPreviousAlert(): XRayFlareEventData? =
         runCatching {
-            json.decodeFromString(
+            Json.decodeFromString(
                 XRayFlareEventData.serializer(),
                 preferences.getString("WeatherAlertChecker.x_ray.flare", null)!!
             )
@@ -41,6 +42,8 @@ abstract class BaseXAlertChecker(
         }
     }
 
-    abstract fun alert(data: XRayFlareEventData)
+    open fun alert(data: XRayFlareEventData) {
+        notificationManager.doFlareNotify(data)
+    }
 
 }

@@ -21,10 +21,11 @@ import net.arwix.spaceweather.library.geomagnetic.data.KpIndexData
 import net.arwix.spaceweather.library.radiation.data.ProtonData
 import net.arwix.spaceweather.library.xray.data.XRayFlareEventData
 
-class SpaceWeatherNotificationManager(
+class WeatherNotificationManager(
     private val applicationContext: Context,
+    private val config: Config,
     private val activityClass: Class<out Activity>,
-    private val config: Config
+    private val alertColors: WeatherAlertColors
 ) {
 
     data class Config(
@@ -48,13 +49,13 @@ class SpaceWeatherNotificationManager(
         }
     }
 
-    fun doGeomagneticNotify(kpIndexData: KpIndexData, alertColorsSpace: SpaceWeatherAlertColors) {
+    fun doGeomagneticNotify(kpIndexData: KpIndexData) {
         getManager()?.notify(config.geomagneticIdAction.id,
             notification(applicationContext, config.channelId, R.drawable.ic_geo) {
 
                 val index = kpIndexData.getIntIndex().takeIf { it > 3 } ?: return
                 val largeIcon = createNotificationIcon(
-                    alertColorsSpace.getGeomagneticColor(index),
+                    alertColors.getGeomagneticColor(index),
                     if (index > 4) "G${index - 4}" else "A"
                 )
 
@@ -69,7 +70,7 @@ class SpaceWeatherNotificationManager(
         )
     }
 
-    fun doProtonNotify(protonData: ProtonData, alertColorsSpace: SpaceWeatherAlertColors) {
+    fun doProtonNotify(protonData: ProtonData) {
         getManager()?.notify(config.radiationIdAction.id,
             notification(
                 applicationContext,
@@ -79,7 +80,7 @@ class SpaceWeatherNotificationManager(
 
                 val index = protonData.getIntIndex()
                 val largeIcon = createNotificationIcon(
-                    alertColorsSpace.getRadiationColor(index),
+                    alertColors.getRadiationColor(index),
                     "S$index"
                 )
 
@@ -94,7 +95,7 @@ class SpaceWeatherNotificationManager(
         )
     }
 
-    fun doFlareNotify(flareData: XRayFlareEventData, alertColorsSpace: SpaceWeatherAlertColors) {
+    fun doFlareNotify(flareData: XRayFlareEventData) {
         getManager()?.notify(config.flareIdAction.id,
             notification(
                 applicationContext,
@@ -123,7 +124,7 @@ class SpaceWeatherNotificationManager(
                     whenTime(flareData.maxTime ?: 0L)
                     largeIcon(
                         createNotificationIcon(
-                            alertColorsSpace.getFlareColor(eventClass),
+                            alertColors.getFlareColor(eventClass),
                             "R$index"
                         )
                     )
@@ -132,7 +133,7 @@ class SpaceWeatherNotificationManager(
                     whenTime(flareData.beginTime)
                     largeIcon(
                         createNotificationIcon(
-                            alertColorsSpace[SpaceWeatherAlertColors.TypeColor.Active],
+                            alertColors[WeatherAlertColors.TypeColor.Active],
                             " "
                         )
                     )
