@@ -9,6 +9,9 @@ interface HemisphericDao {
     @Query("SELECT * FROM hemispheric_power_table ORDER BY time DESC LIMIT :count")
     abstract fun getAllData(count: Int): Flow<List<HemisphericPowerData>>
 
+    @Query("SELECT * FROM hemispheric_power_table ORDER BY time DESC")
+    abstract fun getAllData(): Flow<List<HemisphericPowerData>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun inserts(list: List<HemisphericPowerData>)
 
@@ -22,4 +25,5 @@ interface HemisphericDao {
     }
 
     fun getAllDataDistinctUntilChanged(count: Int) = getAllData(count).distinctUntilChanged()
+    fun getAllDataDistinctUntilChanged() = getAllData().distinctUntilChanged()
 }
