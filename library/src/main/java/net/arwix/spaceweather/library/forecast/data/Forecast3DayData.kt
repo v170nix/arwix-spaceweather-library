@@ -1,29 +1,34 @@
-package net.arwix.spaceweather.library.data
+package net.arwix.spaceweather.library.forecast.data
 
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
+import net.arwix.spaceweather.library.data.SpaceWeatherApi
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Keep
 @Serializable
-class WeatherForecast3DayData constructor(
-    val geomagnetic: Array<WeatherForecastItem.GeoItem>,
-    val radiation: Array<WeatherForecastItem.RadiationItem>,
-    val xRay: Array<WeatherForecastItem.XRayItem>
+class Forecast3DayData constructor(
+    val geomagnetic: Array<ForecastItem.GeoItem>,
+    val radiation: Array<ForecastItem.RadiationItem>,
+    val xRay: Array<ForecastItem.XRayItem>
 ) {
     constructor(data: SpaceWeatherApi.ForecastData) : this(
         data.geomagnetic.map {
-            WeatherForecastItem.GeoItem(stringDateToTime(it.date), it.percent_active, it.percent_minor_storm, it.percent_major_storm)
+            ForecastItem.GeoItem(
+                stringDateToTime(it.date),
+                it.percent_active,
+                it.percent_minor_storm,
+                it.percent_major_storm
+            )
         }.toTypedArray(),
         data.radiation.map {
-            WeatherForecastItem.RadiationItem(stringDateToTime(it.date), it.percent)
+            ForecastItem.RadiationItem(stringDateToTime(it.date), it.percent)
         }.toTypedArray(),
         data.x_ray.map {
-            WeatherForecastItem.XRayItem(stringDateToTime(it.date), it.percent_m, it.percent_x)
+            ForecastItem.XRayItem(stringDateToTime(it.date), it.percent_m, it.percent_x)
         }.toTypedArray())
 
     fun toJson(): String {
@@ -39,19 +44,19 @@ class WeatherForecast3DayData constructor(
             return formatter.parse("${keys[0]} ${keys[1]} ${keys[2]}")!!.time
         }
 
-        fun fromJson(string: String): WeatherForecast3DayData = json.decodeFromString(serializer(), string) // gson.fromJson(string, WeatherForecast3DayData::class.java)
+        fun fromJson(string: String): Forecast3DayData = json.decodeFromString(serializer(), string) // gson.fromJson(string, WeatherForecast3DayData::class.java)
     }
 }
 
 @Keep
 @Serializable
-sealed class WeatherForecastItem(@SerialName("item_time")open val time: Long) {
-    @Keep @Serializable data class RadiationItem(override val time: Long, val percent: Byte): WeatherForecastItem(time)
-    @Keep @Serializable data class XRayItem(override val time: Long, val mPercent: Byte, val xPercent: Byte): WeatherForecastItem(time)
+sealed class ForecastItem(@SerialName("item_time")open val time: Long) {
+    @Keep @Serializable data class RadiationItem(override val time: Long, val percent: Byte): ForecastItem(time)
+    @Keep @Serializable data class XRayItem(override val time: Long, val mPercent: Byte, val xPercent: Byte): ForecastItem(time)
     @Keep @Serializable data class GeoItem(
         override val time: Long,
         val activePercent: Byte,
         val minorPercent: Byte,
         val majorPercent: Byte
-    ): WeatherForecastItem(time)
+    ): ForecastItem(time)
 }
