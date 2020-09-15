@@ -41,10 +41,10 @@ class ForecastRepository(
         throw IllegalStateException()
     }
 
-//    fun getData() = getData(preferences)
+    override suspend fun getData() = getData(preferences)
 
     override fun getFlow(): Flow<Forecast3DayData> =
-        callbackFlow <Forecast3DayData> {
+        callbackFlow {
             Companion.getData(preferences)?.run(::sendBlocking)
             val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
                 if (key == KEY_FORECAST_DATA) {

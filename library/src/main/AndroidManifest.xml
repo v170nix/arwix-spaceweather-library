@@ -1,2 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.arwix.spaceweather.library" />
+    package="net.arwix.spaceweather.library">
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>
