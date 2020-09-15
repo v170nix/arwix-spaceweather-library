@@ -21,7 +21,7 @@ open class WeatherUseCase<T>(private val repository: SpaceWeatherRepository<T>) 
             WrappedLoadedData(data, updatingState)
         }
 
-    suspend fun init() = supervisorScope {
+    open suspend fun init() = supervisorScope {
         val list = repository.getData()
         _dataState.value = list
         repository.getFlow()
@@ -29,7 +29,7 @@ open class WeatherUseCase<T>(private val repository: SpaceWeatherRepository<T>) 
             .launchIn(this)
     }
 
-    suspend fun update(force: Boolean) = supervisorScope {
+    open suspend fun update(force: Boolean) = supervisorScope {
         repository.updateAsFlow(force).onEach {
             _updatingState.value = it
         }.launchIn(this)

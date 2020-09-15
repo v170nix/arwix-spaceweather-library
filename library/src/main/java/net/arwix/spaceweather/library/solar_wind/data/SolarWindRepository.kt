@@ -10,7 +10,6 @@ import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.createRandomString
 import net.arwix.spaceweather.library.data.SpaceWeatherApi
 import net.arwix.spaceweather.library.data.SpaceWeatherRepository
-import net.arwix.spaceweather.library.geomagnetic.data.KpIndexData
 
 class SolarWindRepository(
     private val api: SpaceWeatherApi,
@@ -40,6 +39,7 @@ class SolarWindRepository(
         throw IllegalStateException()
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     fun getFlow(count: Int = 1440 * 3): Flow<List<SolarWindData>> =
         solarWindDao.getAllDataDistinctUntilChanged(count).filter { it.isNotEmpty() }
 
