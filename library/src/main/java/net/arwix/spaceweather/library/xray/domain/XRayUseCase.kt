@@ -1,16 +1,16 @@
 package net.arwix.spaceweather.library.xray.domain
 
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import net.arwix.extension.WrappedLoadedData
 import net.arwix.spaceweather.library.domain.WeatherUseCase
 import net.arwix.spaceweather.library.xray.data.XRayData
 import net.arwix.spaceweather.library.xray.data.XRayFlareEventData
 import net.arwix.spaceweather.library.xray.data.XRayRepository
 
-open class XRayUseCase(private val repository: XRayRepository): WeatherUseCase<Pair<List<XRayData>, List<XRayData>>>(repository) {
+open class XRayUseCase(private val repository: XRayRepository) :
+    WeatherUseCase<Pair<List<XRayData>, List<XRayData>>>(repository) {
 
     private val _dataFlareState = MutableStateFlow<XRayFlareEventData?>(null)
     val flareState
@@ -18,14 +18,15 @@ open class XRayUseCase(private val repository: XRayRepository): WeatherUseCase<P
             WrappedLoadedData(data, updatingState)
         }
 
-    override suspend fun init(): Job {
-        return supervisorScope {
-            launch { super.init() }
-            val list = repository.getFlareFlow()
-            _dataFlareState.value = list.first()
-            repository.getFlareFlow()
-                .onEach { _dataFlareState.value = it }
-                .launchIn(this)
+    override fun init(scope: CoroutineScope) {
+        super.init(scope)
+        val list = repository.getFlareFlow()
+        scope.launch {
+            val data = list.first()
+            if (_dataFlareState.value == null) _dataFlareState.value = data
         }
+        repository.getFlareFlow()
+            .onEach { _dataFlareState.value = it }
+            .launchIn(scope)
     }
 }

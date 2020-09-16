@@ -1,23 +1,24 @@
-package net.arwix.spaceweather.library.forecast.data
+package net.arwix.spaceweather.library.forecast.domain
 
 import android.Manifest
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.GrantPermissionRule
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.yield
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.first
 import kotlinx.serialization.json.Json
+import net.arwix.extension.WrappedLoadedData
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.retrofit2converter.asConverterFactory
 import net.arwix.spaceweather.library.data.SpaceWeatherApi
+import net.arwix.spaceweather.library.forecast.data.Forecast3DayData
+import net.arwix.spaceweather.library.forecast.data.ForecastRepository
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
-import org.junit.Assert.*
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -25,19 +26,19 @@ import org.junit.runner.RunWith
 import retrofit2.Retrofit
 
 @RunWith(AndroidJUnit4::class)
-class ForecastRepositoryTest {
+class ForecastUseCaseTest {
 
     private lateinit var forecastRepository: ForecastRepository
     private lateinit var api: SpaceWeatherApi
-
-    // https://developer.android.com/training/testing/unit-testing/local-unit-tests
-    // https://medium.com/swlh/kotlin-coroutines-in-android-unit-test-28ff280fc0d5
+    private lateinit var forecastUseCase: ForecastUseCase
 
     @get:Rule
     val permissionRule: GrantPermissionRule = GrantPermissionRule.grant(Manifest.permission.INTERNET)
 
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private val pref: SharedPreferences = context.getSharedPreferences("myPref", MODE_PRIVATE)
+    private val pref: SharedPreferences = context.getSharedPreferences("myPref",
+        Context.MODE_PRIVATE
+    )
 
     @Before
     fun setUp() {
@@ -55,35 +56,32 @@ class ForecastRepositoryTest {
             .create(SpaceWeatherApi::class.java)
         val checker =  UpdateCheckerData(pref, "weather.v3.forecast3day.update_time")
         forecastRepository = ForecastRepository(api, pref, checker)
+        forecastUseCase = ForecastUseCase(forecastRepository)
         pref.edit().clear().apply()
     }
 
     @Test
     fun update() {
         runBlocking {
+            val initJob = Job()
+            forecastUseCase.init(this + initJob)
+
+            var data: WrappedLoadedData<Forecast3DayData>? = null
             val job = launch {
-                val data = forecastRepository.getFlow().firstOrNull()
-                assertNotNull(data)
+                data = forecastUseCase.state
+                    .filter { it.value != null }
+                    .first()
             }
-            val firstData = forecastRepository.getData()
-            assertNull(firstData)
-
-            when (val result = forecastRepository.update(true)) {
-                UpdateCheckerData.UpdateResult.IsNotUpdateTime -> throw IllegalStateException("UpdateResult.IsNotUpdateTime")
-
-                is UpdateCheckerData.UpdateResult.Success<*> -> {
-                    result as UpdateCheckerData.UpdateResult.Success<Forecast3DayData>
-                    val data = forecastRepository.getData()!!
-                    assertArrayEquals(data.geomagnetic, result.values.geomagnetic)
-                    assertArrayEquals(data.radiation, result.values.radiation)
-                    assertArrayEquals(data.xRay, result.values.xRay)
-                    yield()
-                    job.cancel()
-                }
-                is UpdateCheckerData.UpdateResult.Failure -> throw IllegalStateException("UpdateResult.Failure")
+            launch {
+                forecastUseCase.update(true)
             }
+            delay(1000)
+            job.cancel()
+            initJob.cancel()
+            assertNotNull(data)
         }
     }
+
 
     private fun OkHttpClient.changeToGZipType(): OkHttpClient = this.newBuilder().addNetworkInterceptor {
         val originalRequest = it.request()
