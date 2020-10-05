@@ -60,7 +60,7 @@ class WeatherNotificationManager(
                 )
 
                 contentTitle(applicationContext.getString(R.string.space_weather_notification_geomagnetic_header))
-                subText(if (index > 4) "G${index - 4}" else "A")
+                subText(if (index > 4) "G${index - 4}" else "Kp4")
                 contentText(applicationContext.resources.getStringArray(R.array.space_weather_notification_geomagnetic_info)[index - 4])
                 whenTime(kpIndexData.time * 1000L)
                 largeIcon(largeIcon)
