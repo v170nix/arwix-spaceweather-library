@@ -33,7 +33,7 @@ abstract class WeatherAlertChecker<T: WeatherSWPCData> {
             saveCurrentAlert(maxElement)
         } else if (previousAlertData != null) {
             if (maxElement.getIntIndex() > previousAlertData.getIntIndex()) {
-                // 4 5 6
+                // 6 5 4
                 alert(maxElement)
                 saveCurrentAlert(maxElement)
             } else if (
@@ -41,7 +41,7 @@ abstract class WeatherAlertChecker<T: WeatherSWPCData> {
                 old3Index < currentIndex &&
                 currentData.time > previousAlertData.time + minDeltaTime
             ) {
-                // 4 6 5
+                // 5 6 5
                 alert(currentData)
                 copyData(previousAlertData, maxElement.time)
                 copyData(previousAlertData, maxElement.time)?.let(::saveCurrentAlert)
