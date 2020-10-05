@@ -1,8 +1,9 @@
-package net.arwix.spaceweather.library.forecast.domain
+package net.arwix.spaceweather.library.xray.domain
 
 import android.Manifest
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.GrantPermissionRule
@@ -13,8 +14,9 @@ import net.arwix.extension.WrappedLoadedData
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.createSpaceWeatherApi
 import net.arwix.spaceweather.library.data.SpaceWeatherApi
-import net.arwix.spaceweather.library.forecast.data.Forecast3DayData
-import net.arwix.spaceweather.library.forecast.data.ForecastRepository
+import net.arwix.spaceweather.library.data.SpaceWeatherDatabase
+import net.arwix.spaceweather.library.xray.data.XRayData
+import net.arwix.spaceweather.library.xray.data.XRayRepository
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
@@ -22,11 +24,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ForecastUseCaseTest {
+class XRayUseCaseTest {
 
-    private lateinit var forecastRepository: ForecastRepository
+    private lateinit var xRayRepository: XRayRepository
     private val api: SpaceWeatherApi = createSpaceWeatherApi()
-    private lateinit var forecastUseCase: ForecastUseCase
+    private lateinit var xRayUseCase: XRayUseCase
 
     @get:Rule
     val permissionRule: GrantPermissionRule = GrantPermissionRule.grant(Manifest.permission.INTERNET)
@@ -39,25 +41,31 @@ class ForecastUseCaseTest {
     @Before
     fun setUp() {
         val checker =  UpdateCheckerData(pref, "weather.v3.forecast3day.update_time")
-        forecastRepository = ForecastRepository(api, pref, checker)
-        forecastUseCase = ForecastUseCase(forecastRepository)
+        val db = Room
+            .inMemoryDatabaseBuilder(context, SpaceWeatherDatabase::class.java).build()
         pref.edit().clear().apply()
+        val updateCheckerData = UpdateCheckerData(pref, "weather.v3.x_ray.update_time")
+        db.getXRayDao().deleteAll()
+        db.getXRayFlareEventDao().deleteAll()
+        xRayRepository = XRayRepository(api, db.getXRayDao(), db.getXRayFlareEventDao(), updateCheckerData)
+        xRayUseCase = XRayUseCase(xRayRepository)
     }
 
     @Test
     fun update() {
         runBlocking {
             val initJob = Job()
-            forecastUseCase.init(this + initJob)
+            xRayUseCase.init(this + initJob)
 
-            var data: WrappedLoadedData<Forecast3DayData>? = null
+            var data: WrappedLoadedData<Pair<List<XRayData>, List<XRayData>>>? = null
             val job = launch {
-                data = forecastUseCase.state
+                data = xRayUseCase.state
                     .filter { it.value != null }
                     .first()
+            //    assertThat( equalTo())
             }
             launch {
-                forecastUseCase.update(true)
+                xRayUseCase.update(true)
             }
             delay(1000)
             job.cancel()
