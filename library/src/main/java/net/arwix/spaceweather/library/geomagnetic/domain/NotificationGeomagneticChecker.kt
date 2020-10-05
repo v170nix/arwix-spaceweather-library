@@ -34,8 +34,8 @@ open class NotificationGeomagneticChecker(
     override fun copyData(data: KpIndexData, time: Long): KpIndexData? = data.copy(time = time)
 
     open fun check(data: List<KpIndexData>) {
-        val bars = data.chunkKpIndexToBar()
-        val dataArray = bars.take(3)
+        val bars = data.asReversed().chunkKpIndexToBar()
+        val dataArray = bars.takeLast(3).asReversed()
         super.check(4, dataArray.toTypedArray(), 10800L)
     }
 

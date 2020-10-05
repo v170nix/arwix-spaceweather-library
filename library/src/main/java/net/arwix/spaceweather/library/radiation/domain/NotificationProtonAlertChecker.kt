@@ -34,8 +34,8 @@ open class NotificationProtonAlertChecker(
     override fun copyData(data: ProtonData, time: Long): ProtonData? = data.copy(time = time)
 
     open fun check(data: List<ProtonData>) {
-        val bars = data.chunkProtonDataToBar()
-        val dataArray = bars.take(3)
+        val bars = data.asReversed().chunkProtonDataToBar()
+        val dataArray = bars.takeLast(3).asReversed()
         super.check(0, dataArray.toTypedArray(), 10800L)
     }
 
