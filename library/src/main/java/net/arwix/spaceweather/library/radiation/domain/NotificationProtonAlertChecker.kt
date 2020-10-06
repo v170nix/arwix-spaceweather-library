@@ -1,7 +1,7 @@
 package net.arwix.spaceweather.library.radiation.domain
 
 import android.content.SharedPreferences
-import net.arwix.spaceweather.library.common.chunkProtonDataToBar
+import net.arwix.spaceweather.library.common.chunkProtonToBarIncludeMaxTime
 import net.arwix.spaceweather.library.domain.WeatherAlertChecker
 import net.arwix.spaceweather.library.domain.WeatherNotificationManager
 import net.arwix.spaceweather.library.radiation.data.ProtonData
@@ -33,10 +33,10 @@ open class NotificationProtonAlertChecker(
 
     override fun copyData(data: ProtonData, time: Long): ProtonData? = data.copy(time = time)
 
-    open fun check(data: List<ProtonData>) {
-        val bars = data.asReversed().chunkProtonDataToBar()
+    open fun check(data: List<ProtonData>, alertIfSameIndex: Boolean = true) {
+        val bars = data.asReversed().chunkProtonToBarIncludeMaxTime()
         val dataArray = bars.takeLast(3).asReversed()
-        super.check(0, dataArray.toTypedArray(), 10800L)
+        super.check(0, dataArray.toTypedArray(), alertIfSameIndex)
     }
 
     override fun alert(data: ProtonData) {

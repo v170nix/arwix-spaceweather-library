@@ -1,23 +1,28 @@
 package net.arwix.spaceweather.library.domain
 
 import net.arwix.spaceweather.library.data.WeatherSWPCBarData
-import net.arwix.spaceweather.library.data.WeatherSWPCData
+import net.arwix.spaceweather.library.geomagnetic.data.KpIndexData
+import org.junit.Test
 
-abstract class WeatherAlertChecker<T : WeatherSWPCData> {
+class WeatherAlertCheckerTest {
 
-    protected abstract fun saveCurrentAlert(data: T)
-    protected abstract fun getPreviousAlert(): T?
-    protected abstract fun copyData(data: T, time: Long): T?
-    protected abstract fun alert(data: T)
+    @Test
+    fun check() {
+//        val previousAlertData = KpIndexData(1601920800, 4.333)
+        val previousAlertData = KpIndexData(1601942400, 4.333)
+        val currentData = KpIndexData(1601953200, 5.6667)
+        val old3Data = KpIndexData(1601942400, 4.333)
+        val array = arrayOf(
+            WeatherSWPCBarData(currentData, currentData.copy(time = currentData.time + 144)),
+            WeatherSWPCBarData(old3Data, old3Data.copy(time = old3Data.time + 14)))
+        val r = check(previousAlertData, 4, array, false)
+        println(r)
+    }
 
-    /**
-     * @param minAlertIndex
-     * @param dataArray [0] current... [1] older
-     * @param minDeltaTime is seconds
-     */
-    open fun check(
+    private fun check(
+        previousAlertData: KpIndexData?,
         minAlertIndex: Int,
-        dataArray: Array<WeatherSWPCBarData<T>>,
+        dataArray: Array<WeatherSWPCBarData<KpIndexData>>,
         alertIfSameIndex: Boolean = false
     ): Boolean {
         val (maxBarData, maxDataInBar) = dataArray.take(2).maxByOrNull {
@@ -26,16 +31,11 @@ abstract class WeatherAlertChecker<T : WeatherSWPCData> {
 
         if (maxBarData.getIntIndex() < minAlertIndex) return false
 
-        val previousAlertData = getPreviousAlert()
         if (previousAlertData == null) {
-            alert(maxDataInBar)
-            saveCurrentAlert(maxBarData)
             return true
         }
         //  5(4a) 7; 1 6(5a);
         if (maxBarData.getIntIndex() > previousAlertData.getIntIndex()) {
-            alert(maxDataInBar)
-            saveCurrentAlert(maxBarData)
             return true
         }
 
@@ -47,28 +47,19 @@ abstract class WeatherAlertChecker<T : WeatherSWPCData> {
         if (previousAlertData.time < old3Data.barData.time) {
             // older minDeltaTime
             if (currentIndex > old3Index) {
-                alert(currentData.maxDataInBar)
-                saveCurrentAlert(currentData.barData)
                 return true
             }
             if (currentIndex == old3Index) {
-                if (alertIfSameIndex) alert(currentData.maxDataInBar)
-                saveCurrentAlert(currentData.barData)
                 return alertIfSameIndex
             }
-            alert(old3Data.maxDataInBar)
-            saveCurrentAlert(old3Data.barData)
             return true
         }
         // 5 5a; 4 5a; 3 5a; 5(5a) 5;
         if (previousAlertData.time < currentData.barData.time) {
             if (currentIndex == previousAlertData.getIntIndex()) {
-                if (alertIfSameIndex) alert(currentData.maxDataInBar)
-                saveCurrentAlert(currentData.barData)
                 return alertIfSameIndex
             }
         }
         return false
     }
-
 }
