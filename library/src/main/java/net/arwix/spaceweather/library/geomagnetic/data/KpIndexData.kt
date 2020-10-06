@@ -5,9 +5,11 @@ import androidx.annotation.IntRange
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 import net.arwix.spaceweather.library.data.WeatherSWPCData
 import kotlin.math.roundToInt
 
+@Serializable
 @Entity(tableName = "kp_index_flux_table")
 data class KpIndexData(
     @PrimaryKey override val time: Long,

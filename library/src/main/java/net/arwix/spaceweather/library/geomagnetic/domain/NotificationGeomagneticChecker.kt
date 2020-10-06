@@ -1,6 +1,9 @@
 package net.arwix.spaceweather.library.geomagnetic.domain
 
 import android.content.SharedPreferences
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 import net.arwix.spaceweather.library.common.chunkKpIndexToBar
 import net.arwix.spaceweather.library.domain.WeatherAlertChecker
 import net.arwix.spaceweather.library.domain.WeatherNotificationManager
@@ -36,6 +39,9 @@ open class NotificationGeomagneticChecker(
     open fun check(data: List<KpIndexData>) {
         val bars = data.asReversed().chunkKpIndexToBar()
         val dataArray = bars.takeLast(3).asReversed()
+        val logCheck = LogCheck(dataArray)
+        val string = Json.encodeToString(serializer(), logCheck)
+        preferences.edit().putString("WeatherLog.dataArray", string).commit()
         super.check(4, dataArray.toTypedArray(), 10800L)
     }
 
@@ -43,3 +49,7 @@ open class NotificationGeomagneticChecker(
         notificationManager.doGeomagneticNotify(data)
     }
 }
+
+
+@Serializable
+data class LogCheck(val dataArray: List<KpIndexData>)
