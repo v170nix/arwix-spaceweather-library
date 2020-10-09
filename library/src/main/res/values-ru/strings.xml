@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="space_weather_status_quiet">Фон спокойный</string>
+    <string name="space_weather_status_unsettled">Фон неустойчивый</string>
+    <string name="space_weather_status_active_field">Фон активный</string>
+    <string name="space_weather_status_minor_storm">Слабая буря</string>
+    <string name="space_weather_status_moderate_storm">Умеренная буря</string>
+    <string name="space_weather_status_strong_storm">Сильная буря</string>
+    <string name="space_weather_status_severe_storm">Очень сильная буря</string>
+    <string name="space_weather_status_extreme_storm">Экстремальная буря</string>
+    <string name="space_weather_status_minor_blackout">Слабое ионосферное возмущение</string>
+    <string name="space_weather_status_moderate_blackout">Умеренное ионосферное возмущение</string>
+    <string name="space_weather_status_strong_blackout">Сильное ионосферное возмущение</string>
+    <string name="space_weather_status_severe_blackout">Очень сильное ионосферное возмущение</string>
+    <string name="space_weather_status_extreme_blackout">Экстремальное ионосферное возмущение</string>
+
+    <string name="space_weather_aurora_power_north">Север</string>
+    <string name="space_weather_aurora_power_south">Юг</string>
+    <string name="space_weather_aurora_power_gw">%1$d ГВт</string>
+
+    <string name="space_weather_forecast">Прогноз</string>
+    <string name="space_weather_forecast_percent_description">Проценты</string>
+
+    <string name="space_weather_geomagnetic_activity">Геомагнитная активность</string>
+    <string name="space_weather_kp_index">Kp index</string>
+
+    <string name="space_weather_other_systems_text">Другие системы</string>
+
+    <string name="space_weather_status_current">Сейчас</string>
+    <string name="space_weather_status_24Hour">Поледние 24 часа</string>
+
+    <string name="space_weather_geomagnetic_status_title">Геомагнитная буря</string>
+    <string name="space_weather_geomagnetic_power_system_title">Энергосистемы</string>
+    <string name="space_weather_geomagnetic_spacecraft_title">Системы управления КК</string>
+    <string name="space_weather_geomagnetic_other_title" translatable="false">@string/space_weather_other_systems_text</string>
+
+    <string-array name="space_weather_geomagnetic_effects_power_system">
+        <item>Могут произойти слабые колебания энергосистем</item>
+        <item>В высоких широтах на энергетических системах существует вероятность скачков напряжения\nДлительные бури могут привести к повреждению трансформаторов</item>
+        <item>На отдельных участках может потребоваться коррекция напряжения, на защитных устройствах существует вероятность срабатывания ложной тревоги</item>
+        <item>Широкое распространение проблем контроля напряжения в рамках всей сети, существует вероятность срабатывания защитных систем в ключевых точках энергосистем</item>
+        <item>Широкое распространение проблем контроля напряжения и защиты в рамках всей сети, некоторые энергосистемы могут быть выключены или испытать полный коллапс\nВозможны повреждения трансформаторов</item>
+    </string-array>
+
+    <string-array name="space_weather_geomagnetic_effects_spacecraft">
+        <item>Возможно незначительное влияние на операции управления спутниками</item>
+        <item>Может потребоваться корректировка ориентации КК, возможны изменения в прогнозируемой орбите</item>
+        <item>Вероятно накопление поверхностного заряда на космических аппаратах\nВозрастание сопротивления атмосферы на низких околоземных орбитах может привести к проблемам ориентации</item>
+        <item>Возможно накопление поверхностного заряда и проблемы в слежении за КК, может понадобиться корректировка ориентации</item>
+        <item>Могут возникнуть обширные зарядки поверхности КК, проблемы с ориентацией, передачей данных и отслеживании спутников</item>
+    </string-array>
+
+    <string-array name="space_weather_geomagnetic_effects_other">
+        <item>Влияние на мигрирующих животных\nВозможны полярные сияния в высоких широтах (60° геомагнитной широты)</item>
+        <item>Влияние на мигрирующих животных\nПеребои в КВ-радиодиапазне в высоких широтах\nПолярные сияния возможны на уровне 55° геомагнитной широты</item>
+        <item>Влияние на мигрирующих животных\nПеребои в спутниковой навигации и низкочастотной радионавигации\nПрерывания вещания в КВ-радиодиапазне\nПолярные сияния возможны на уровне 50° геомагнитной широты</item>
+        <item>Влияние на мигрирующих животных\nИндуцированние токов на системах трубопроводов\nРабота КВ-радиодиапазна носит спорадический характер\nУхудшение спутниковой навигации на период до нескольких часов, нарушение низкочастотной радионавигации\nПолярные сияния возможны на уровне 45° геомагнитной широты</item>
+        <item>Влияние на мигрирующих животных\nИндуцированние токов на системах трубопроводов может достигать сотен ампер, во многих районах распространение волн в КВ-радиодиапазне невозможно в течение одного-двух дней\nУхудшение спутниковой навигации на нескольких дней\nНизкочастотная радионавигация может отсутствовать в течение нескольких часов\nПолярные сияния возможны ниже 40° геомагнитной широты</item>
+    </string-array>
+
+    <string name="space_weather_radiation_status_title">Солнечная радиация</string>
+    <string name="space_weather_radiation_biological_title">Биология</string>
+    <string name="space_weather_radiation_satellite_title">Спутниковые операции</string>
+    <string name="space_weather_radiation_other_title" translatable="false">@string/space_weather_other_systems_text</string>
+
+    <string-array name="space_weather_radiation_biological">
+        <item>Отсутствуют</item>
+        <item>Пассажиры и экипаж в высоко летящих самолетах могут подвергаться повышенному радиационному риску</item>
+        <item>Радиационная опасность для космонавтов в открытом космосе; Пассажиры и экипаж в высоко летящих самолетах могут подвергаться повышенному радиационному риску</item>
+        <item>Неизбежная радиационная опасность для космонавтов в открытом космосе; Пассажиры и экипаж в высоко летящих самолетах могут подвергаться повышенному радиационному риску</item>
+        <item>Неизбежная высокая радиационная опасность для космонавтов в открытом космосе; Пассажиры и экипаж в высоко летящих самолетах могут подвергаться повышенному радиационному риску</item>
+    </string-array>
+
+    <string-array name="space_weather_radiation_satellite_operations">
+        <item>Отсутствуют</item>
+        <item>Возможны разовые помехи в системах получения изображений</item>
+        <item>Возможны разовые помехи в системах визуализации и небольшое снижение эффективности солнечных панелей</item>
+        <item>Могут возникнуть проблемы в системах памяти и шум в полученных изображениях; Проблемы с навигацией по звездам. Эффективность солнечных батарей космических аппаратов уменьшена</item>
+        <item>Отказы спутников: ошибки систем памяти могут привести к потере контроля, вызвать серьезный шум в изображениях, отказ систем ориентации по звездным трекерам; Возможен неустранимый ущерб солнечным батареям</item>
+    </string-array>
+
+    <string-array name="space_weather_radiation_other_system">
+        <item>Незначительные воздействия на коротковолновые передачи в полярных регионах</item>
+        <item>Малые воздействия на коротковолновые передачи и навигационные системы в полярных регионах</item>
+        <item>Сильные помехи для коротковолновых передач через полярные регионы, вероятны навигационные ошибки</item>
+        <item>Блокировка коротковолновых передач через полярные регионы, увеличение навигационных ошибок в течение нескольких дней</item>
+        <item>Полная невозможность коротковолновых передач через полярные области, ошибки в навигационных системах делают измерение местоположения чрезвычайно трудным</item>
+    </string-array>
+
+    <string name="space_weather_radio_blackout_status_title">Солнечные вспышки</string>
+    <string name="space_weather_radio_blackout_hf_radio_title">КВ радио</string>
+    <string name="space_weather_radio_blackout_navigation_title">Навигация</string>
+
+    <string-array name="space_weather_radio_blackout_navigation">
+        <item>Деградация навигационных сигналов на короткие промежутки времени</item>
+        <item>Деградация навигационных сигналов на десятки минут</item>
+        <item>Деградация навигационных сигналов в течение часа</item>
+        <item>Отключение навигационных сигналов вызывает повышенную погрешность позиционирования в течение одного-двух часов. Незначительные нарушения спутниковой навигации на солнечной стороне Земли</item>
+        <item>Отключение навигационных сигналов используемых военными и гражданскими авиационными системами на протяжении многих часов, возможна потеря позиционирования. Ошибки спутниковой навигации в позиционировании в течение нескольких часов на солнечной стороне Земли, которые могут распространиться на ночную сторону</item>
+    </string-array>
+
+    <string-array name="space_weather_radio_blackout_hf_radio">
+        <item>Слабая или незначительная деградация КВ радиосвязи на солнечной стороне, случайная потеря радиосвязи</item>
+        <item>Ограниченная потеря КВ радиосвязи на солнечной стороне в течение десятков минут</item>
+        <item>Широкополосная потеря КВ радиосвязи в течение часа на солнечной стороне Земли</item>
+        <item>Невозможность КВ-радиосвязи на большей части солнечной стороны Земли в течение одного-двух часов</item>
+        <item>Полная блокировка КВ радиодиапазона на всей солнечной стороне Земли в течение нескольких часов. Радиочастотный контакт полностью отсутствует</item>
+    </string-array>
+
+    <string name="space_weather_notification_channel_solar_activity">Солнечная активность</string>
+
+    <string name="space_weather_notification_geomagnetic_header">Геомагнитная активность</string>
+    <string-array name="space_weather_notification_geomagnetic_info">
+        <item>Фон активный</item>
+        <item>Слабая буря</item>
+        <item>Умеренная буря</item>
+        <item>Сильная буря</item>
+        <item>Очень сильная буря</item>
+        <item>Экстремальная буря</item>
+    </string-array>
+
+    <string name="space_weather_notification_radiation_header">Солнечная радиация</string>
+    <string-array name="space_weather_notification_radiation_info">
+        <item>Фон спокойный</item>
+        <item>Слабая буря</item>
+        <item>Умеренная буря</item>
+        <item>Сильная буря</item>
+        <item>Очень сильная буря</item>
+        <item>Экстремальная буря</item>
+    </string-array>
+
+    <string name="space_weather_notification_solar_flare_header">Солнечная вспышка</string>
+    <string name="space_weather_notification_solar_flare_begin_event_context">Начало всыпшки</string>
+    <string name="space_weather_notification_solar_flare_context">класс вспышки %s</string>
+</resources>
