@@ -27,7 +27,7 @@
     <string name="space_weather_other_systems_text">Другие системы</string>
 
     <string name="space_weather_status_current">Сейчас</string>
-    <string name="space_weather_status_24Hour">Поледние 24 часа</string>
+    <string name="space_weather_status_24Hour">Последние 24 часа</string>
 
     <string name="space_weather_geomagnetic_status_title">Геомагнитная буря</string>
     <string name="space_weather_geomagnetic_power_system_title">Энергосистемы</string>
