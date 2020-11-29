@@ -110,8 +110,8 @@ class WeatherNotificationManager(
                 if (isMaxEvent) {
                     val maxValue = eventClass.substring(1).toDoubleOrNull() ?: 0.0
                     val index = when (eventClass) {
-                        "M" -> if (maxValue < 5.0) 0 else 1
-                        "X" -> if (maxValue < 10.0) 2 else if (maxValue < 20.0) 3 else 4
+                        "M" -> if (maxValue < 5.0) 1 else 2
+                        "X" -> if (maxValue < 10.0) 3 else if (maxValue < 20.0) 4 else 5
                         else -> 0
                     }
                     subText(eventClass)
