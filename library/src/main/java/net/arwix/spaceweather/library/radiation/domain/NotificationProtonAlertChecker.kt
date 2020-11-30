@@ -36,7 +36,7 @@ open class NotificationProtonAlertChecker(
     open fun check(data: List<ProtonData>, alertIfSameIndex: Boolean = true) {
         val bars = data.asReversed().chunkProtonToBarIncludeMaxTime()
         val dataArray = bars.takeLast(3).asReversed()
-        super.check(0, dataArray.toTypedArray(), alertIfSameIndex)
+        super.check(1, dataArray.toTypedArray(), alertIfSameIndex)
     }
 
     override fun alert(data: ProtonData) {
