@@ -3,6 +3,7 @@ package net.arwix.spaceweather.library.xray.domain
 import android.Manifest
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -67,10 +68,11 @@ class XRayUseCaseTest {
             launch {
                 xRayUseCase.update(true)
             }
-            delay(1000)
+            delay(5000)
             job.cancel()
             initJob.cancel()
             assertNotNull(data)
+            Log.e("test", data.toString())
         }
     }
 

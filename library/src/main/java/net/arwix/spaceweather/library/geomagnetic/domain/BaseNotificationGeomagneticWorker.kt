@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.annotation.Keep
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.withContext
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.geomagnetic.data.GeomagneticRepository
 
@@ -19,9 +20,9 @@ abstract class BaseNotificationGeomagneticWorker(
     protected abstract val alertChecker: NotificationGeomagneticChecker
     protected abstract val repository: GeomagneticRepository
 
-    override suspend fun doWork(): Result = coroutineScope {
-        val r = repository.update(true)
+    override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
+            val r = repository.update(true)
             if (r is UpdateCheckerData.UpdateResult.Success<*>) {
                 alertChecker.check(repository.getFlow().first())
             }
