@@ -45,10 +45,16 @@ class ForecastRepository(
 
     override fun getFlow(): Flow<Forecast3DayData> =
         callbackFlow {
-            Companion.getData(preferences)?.run(::sendBlocking)
+            Companion.getData(preferences)?.run {
+                this@callbackFlow.sendBlocking(this)
+            }
+
             val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
                 if (key == KEY_FORECAST_DATA) {
-                    Companion.getData(preferences)?.run(::sendBlocking)
+                    Companion.getData(preferences)?.run {
+                        this@callbackFlow.sendBlocking(this)
+                    }
+//                    Companion.getData(preferences)?.run(::sendBlocking)
                 }
             }
             preferences.registerOnSharedPreferenceChangeListener(listener)
