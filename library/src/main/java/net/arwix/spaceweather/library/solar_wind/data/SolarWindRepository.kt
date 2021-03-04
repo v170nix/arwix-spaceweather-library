@@ -8,11 +8,11 @@ import kotlinx.coroutines.withContext
 import net.arwix.extension.UpdatingState
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.createRandomString
-import net.arwix.spaceweather.library.data.SpaceWeatherApi
+import net.arwix.spaceweather.library.data.SpaceWeatherApi2
 import net.arwix.spaceweather.library.data.SpaceWeatherRepository
 
 class SolarWindRepository(
-    private val api: SpaceWeatherApi,
+    private val api: SpaceWeatherApi2,
     private val solarWindDao: SolarWindDao,
     private val updateCheckerData: UpdateCheckerData
 ): SpaceWeatherRepository<List<SolarWindData>> {

@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import net.arwix.extension.WrappedLoadedData
 import net.arwix.spaceweather.library.common.UpdateCheckerData
-import net.arwix.spaceweather.library.common.createSpaceWeatherApi
-import net.arwix.spaceweather.library.data.SpaceWeatherApi
+import net.arwix.spaceweather.library.common.createSpaceWeatherApi2
+import net.arwix.spaceweather.library.data.SpaceWeatherApi2
 import net.arwix.spaceweather.library.data.SpaceWeatherDatabase
 import net.arwix.spaceweather.library.xray.data.XRayData
 import net.arwix.spaceweather.library.xray.data.XRayRepository
@@ -28,7 +28,7 @@ import org.junit.runner.RunWith
 class XRayUseCaseTest {
 
     private lateinit var xRayRepository: XRayRepository
-    private val api: SpaceWeatherApi = createSpaceWeatherApi()
+    private val api: SpaceWeatherApi2 = createSpaceWeatherApi2()
     private lateinit var xRayUseCase: XRayUseCase
 
     @get:Rule

@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.flow
 import net.arwix.extension.UpdatingState
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.createRandomString
-import net.arwix.spaceweather.library.data.SpaceWeatherApi
+import net.arwix.spaceweather.library.data.SpaceWeatherApi2
 import net.arwix.spaceweather.library.data.SpaceWeatherRepository
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
 class ForecastRepository(
-    private val api: SpaceWeatherApi,
+    private val api: SpaceWeatherApi2,
     private val preferences: SharedPreferences,
     private val updateCheckerData: UpdateCheckerData
 ) : SpaceWeatherRepository<Forecast3DayData> {

@@ -1,17 +1,18 @@
 package net.arwix.spaceweather.library.geomagnetic.data
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import net.arwix.extension.UpdatingState
-import net.arwix.extension.WrappedLoadedData
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.createRandomString
-import net.arwix.spaceweather.library.data.SpaceWeatherApi
+import net.arwix.spaceweather.library.data.SpaceWeatherApi2
 import net.arwix.spaceweather.library.data.SpaceWeatherRepository
 
 class GeomagneticRepository(
-    private val api: SpaceWeatherApi,
+    private val api: SpaceWeatherApi2,
     private val geoDao: GeomagneticDao,
     private val updateCheckerData: UpdateCheckerData
 ): SpaceWeatherRepository<List<KpIndexData>> {

@@ -6,14 +6,14 @@ import kotlinx.coroutines.withContext
 import net.arwix.extension.UpdatingState
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.createRandomString
-import net.arwix.spaceweather.library.data.SpaceWeatherApi
+import net.arwix.spaceweather.library.data.SpaceWeatherApi2
 import net.arwix.spaceweather.library.data.SpaceWeatherRepository
 import net.arwix.spaceweather.library.xray.data.XRayData.Companion.MODE_1
 import net.arwix.spaceweather.library.xray.data.XRayData.Companion.MODE_5
 
 
 class XRayRepository(
-    private val api: SpaceWeatherApi,
+    private val api: SpaceWeatherApi2,
     private val dao: XRayDao,
     private val flareDao: XRayFlareEventDao,
     private val updateCheckerData: UpdateCheckerData

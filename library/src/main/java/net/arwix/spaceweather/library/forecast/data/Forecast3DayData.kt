@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import net.arwix.spaceweather.library.data.SpaceWeatherApi
+import net.arwix.spaceweather.library.data.SpaceWeatherApi2
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,7 +15,7 @@ class Forecast3DayData constructor(
     val radiation: Array<ForecastItem.RadiationItem>,
     val xRay: Array<ForecastItem.XRayItem>
 ) {
-    constructor(data: SpaceWeatherApi.ForecastData) : this(
+    constructor(data: SpaceWeatherApi2.ForecastData) : this(
         data.geomagnetic.map {
             ForecastItem.GeoItem(
                 stringDateToTime(it.date),

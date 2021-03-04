@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.yield
 import net.arwix.spaceweather.library.common.UpdateCheckerData
-import net.arwix.spaceweather.library.common.createSpaceWeatherApi
-import net.arwix.spaceweather.library.data.SpaceWeatherApi
+import net.arwix.spaceweather.library.common.createSpaceWeatherApi2
+import net.arwix.spaceweather.library.data.SpaceWeatherApi2
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -24,7 +24,7 @@ import org.junit.runner.RunWith
 class ForecastRepositoryTest {
 
     private lateinit var forecastRepository: ForecastRepository
-    private val api: SpaceWeatherApi = createSpaceWeatherApi()
+    private val api: SpaceWeatherApi2 = createSpaceWeatherApi2()
 
     // https://developer.android.com/training/testing/unit-testing/local-unit-tests
     // https://medium.com/swlh/kotlin-coroutines-in-android-unit-test-28ff280fc0d5
