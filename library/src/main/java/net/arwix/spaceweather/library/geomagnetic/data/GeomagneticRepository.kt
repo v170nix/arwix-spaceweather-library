@@ -1,5 +1,6 @@
 package net.arwix.spaceweather.library.geomagnetic.data
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
@@ -29,6 +30,7 @@ class GeomagneticRepository(
             updateCheckerData.saveSuccessUpdateTime()
             return UpdateCheckerData.UpdateResult.Success(it)
         }.onFailure {
+            if (it is CancellationException) throw it
             return UpdateCheckerData.UpdateResult.Failure(it)
         }
         throw IllegalStateException()

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.annotation.Keep
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -28,6 +29,7 @@ abstract class BaseNotificationProtonWorker(
             }
             Result.success()
         } catch (e: Exception) {
+            if (e is CancellationException) throw e
             Result.failure()
         }
     }

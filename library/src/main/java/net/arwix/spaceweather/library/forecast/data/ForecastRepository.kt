@@ -1,6 +1,7 @@
 package net.arwix.spaceweather.library.forecast.data
 
 import android.content.SharedPreferences
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.Flow
@@ -36,6 +37,7 @@ class ForecastRepository(
             updateCheckerData.saveSuccessUpdateTime(nextUpdateTime)
             return UpdateCheckerData.UpdateResult.Success(it)
         }.onFailure {
+            if (it is CancellationException) throw it
             return UpdateCheckerData.UpdateResult.Failure(it)
         }
         throw IllegalStateException()

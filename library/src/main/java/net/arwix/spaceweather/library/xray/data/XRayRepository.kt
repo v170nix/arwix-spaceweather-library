@@ -1,5 +1,6 @@
 package net.arwix.spaceweather.library.xray.data
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
@@ -36,6 +37,7 @@ class XRayRepository(
             updateCheckerData.saveSuccessUpdateTime()
             return UpdateCheckerData.UpdateResult.Success(xRayData to eventData)
         }.onFailure {
+            if (it is CancellationException) throw it
             return UpdateCheckerData.UpdateResult.Failure(it)
         }
         throw IllegalStateException()
