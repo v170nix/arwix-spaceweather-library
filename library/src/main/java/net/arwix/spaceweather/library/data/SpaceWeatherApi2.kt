@@ -1,12 +1,10 @@
 package net.arwix.spaceweather.library.data
 
-import android.util.Log
 import androidx.annotation.Keep
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -21,14 +19,14 @@ object SpaceWeatherApi2 {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(json)
             }
-            install(Logging) {
-                logger = object : Logger {
-                    override fun log(message: String) {
-                        Log.e("Ktor", message)
-                    }
-                }
-                level = LogLevel.ALL
-            }
+//            install(Logging) {
+//                logger = object : Logger {
+//                    override fun log(message: String) {
+////                        Log.e("Ktor", message)
+//                    }
+//                }
+//                level = LogLevel.ALL
+//            }
         }
     }
 
