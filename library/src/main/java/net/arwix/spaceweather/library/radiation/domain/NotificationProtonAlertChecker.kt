@@ -3,13 +3,13 @@ package net.arwix.spaceweather.library.radiation.domain
 import android.content.SharedPreferences
 import net.arwix.spaceweather.library.common.chunkProtonToBarIncludeMaxTime
 import net.arwix.spaceweather.library.domain.WeatherAlertChecker
-import net.arwix.spaceweather.library.domain.WeatherNotificationManager
+import net.arwix.spaceweather.library.domain.WeatherNotification
 import net.arwix.spaceweather.library.radiation.data.ProtonData
 
 @Suppress("unused")
 open class NotificationProtonAlertChecker(
     private val preferences: SharedPreferences,
-    private val notificationManager: WeatherNotificationManager
+    private val weatherNotification: WeatherNotification
 ) : WeatherAlertChecker<ProtonData>() {
 
     override fun saveCurrentAlert(data: ProtonData) {
@@ -40,6 +40,6 @@ open class NotificationProtonAlertChecker(
     }
 
     override fun alert(data: ProtonData) {
-        notificationManager.doProtonNotify(data)
+        weatherNotification.doProtonNotify(data)
     }
 }

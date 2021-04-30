@@ -21,12 +21,12 @@ import net.arwix.spaceweather.library.geomagnetic.data.KpIndexData
 import net.arwix.spaceweather.library.radiation.data.ProtonData
 import net.arwix.spaceweather.library.xray.data.XRayFlareEventData
 
-class WeatherNotificationManager(
+class DefaultWeatherNotificationManager(
     private val applicationContext: Context,
     private val config: Config,
     private val activityClass: Class<out Activity>,
     private val alertColors: WeatherAlertColors
-) {
+): WeatherNotification {
 
     data class Config(
         val channelId: String = "SpaceWeather.notification.activity.id",
@@ -49,7 +49,7 @@ class WeatherNotificationManager(
         }
     }
 
-    fun doGeomagneticNotify(kpIndexData: KpIndexData) {
+    override fun doGeomagneticNotify(kpIndexData: KpIndexData) {
         getManager()?.notify(config.geomagneticIdAction.id,
             notification(applicationContext, config.channelId, R.drawable.ic_geo) {
 
@@ -70,7 +70,7 @@ class WeatherNotificationManager(
         )
     }
 
-    fun doProtonNotify(protonData: ProtonData) {
+    override fun doProtonNotify(protonData: ProtonData) {
         getManager()?.notify(config.radiationIdAction.id,
             notification(
                 applicationContext,
@@ -95,7 +95,7 @@ class WeatherNotificationManager(
         )
     }
 
-    fun doFlareNotify(flareData: XRayFlareEventData) {
+    override fun doFlareNotify(flareData: XRayFlareEventData) {
         getManager()?.notify(config.flareIdAction.id,
             notification(
                 applicationContext,

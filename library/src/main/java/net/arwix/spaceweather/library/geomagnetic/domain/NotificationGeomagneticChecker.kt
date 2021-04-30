@@ -7,13 +7,13 @@ import kotlinx.serialization.serializer
 import net.arwix.spaceweather.library.common.chunkKpIndexToBarIncludeMaxTime
 import net.arwix.spaceweather.library.data.WeatherSWPCBarData
 import net.arwix.spaceweather.library.domain.WeatherAlertChecker
-import net.arwix.spaceweather.library.domain.WeatherNotificationManager
+import net.arwix.spaceweather.library.domain.WeatherNotification
 import net.arwix.spaceweather.library.geomagnetic.data.KpIndexData
 
 @Suppress("unused")
 open class NotificationGeomagneticChecker(
     private val preferences: SharedPreferences,
-    private val notificationManager: WeatherNotificationManager
+    private val weatherNotification: WeatherNotification
 ) : WeatherAlertChecker<KpIndexData>() {
 
     override fun saveCurrentAlert(data: KpIndexData) {
@@ -47,7 +47,7 @@ open class NotificationGeomagneticChecker(
     }
 
     override fun alert(data: KpIndexData) {
-        notificationManager.doGeomagneticNotify(data)
+        weatherNotification.doGeomagneticNotify(data)
     }
 }
 
