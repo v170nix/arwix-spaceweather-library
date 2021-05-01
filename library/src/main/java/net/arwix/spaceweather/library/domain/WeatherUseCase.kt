@@ -3,10 +3,11 @@ package net.arwix.spaceweather.library.domain
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.supervisorScope
 import net.arwix.extension.UpdatingState
+import net.arwix.extension.safeLaunchIn
 import net.arwix.spaceweather.library.data.SpaceWeatherRepository
 
 open class WeatherUseCase<T>(private val repository: SpaceWeatherRepository<T>) {
@@ -29,8 +30,8 @@ open class WeatherUseCase<T>(private val repository: SpaceWeatherRepository<T>) 
 
     open suspend fun update(force: Boolean) = supervisorScope {
         repository.updateAsFlow(force).onEach {
-            _updatingState.value = it
-        }.launchIn(this)
+            if (isActive) _updatingState.value = it
+        }.safeLaunchIn(this)
     }
 
 }

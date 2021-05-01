@@ -6,6 +6,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.isActive
 import net.arwix.extension.UpdatingState
 import net.arwix.extension.trySendBlocking
 import net.arwix.spaceweather.library.common.UpdateCheckerData
@@ -48,13 +49,13 @@ class ForecastRepository(
     override fun getFlow(): Flow<Forecast3DayData> =
         callbackFlow {
             Companion.getData(preferences)?.run {
-                this@callbackFlow.trySendBlocking(this)
+                if (isActive) this@callbackFlow.trySendBlocking(this)
             }
 
             val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
                 if (key == KEY_FORECAST_DATA) {
                     Companion.getData(preferences)?.run {
-                        this@callbackFlow.trySendBlocking(this)
+                        if (isActive) this@callbackFlow.trySendBlocking(this)
                     }
 //                    Companion.getData(preferences)?.run(::sendBlocking)
                 }
