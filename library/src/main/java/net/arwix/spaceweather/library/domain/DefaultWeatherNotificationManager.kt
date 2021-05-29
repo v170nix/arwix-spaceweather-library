@@ -84,7 +84,7 @@ class DefaultWeatherNotificationManager(
                     "S$index"
                 )
 
-                contentTitle(applicationContext.getString(R.string.space_weather_notification_geomagnetic_header))
+                contentTitle(applicationContext.getString(R.string.space_weather_notification_radiation_header))
                 subText("S$index")
                 contentText(applicationContext.resources.getStringArray(R.array.space_weather_notification_radiation_info)[index])
                 whenTime(protonData.time * 1000L)
