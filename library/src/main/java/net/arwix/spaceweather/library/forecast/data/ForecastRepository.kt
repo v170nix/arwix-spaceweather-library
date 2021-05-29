@@ -3,12 +3,12 @@ package net.arwix.spaceweather.library.forecast.data
 import android.content.SharedPreferences
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
 import net.arwix.extension.UpdatingState
-import net.arwix.extension.trySendBlocking
 import net.arwix.spaceweather.library.common.UpdateCheckerData
 import net.arwix.spaceweather.library.common.createRandomString
 import net.arwix.spaceweather.library.data.SpaceWeatherApi2
