@@ -2,7 +2,7 @@ package net.arwix.spaceweather.library.data
 
 import androidx.annotation.Keep
 import io.ktor.client.*
-import io.ktor.client.engine.cio.*
+import io.ktor.client.engine.okhttp.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
@@ -15,7 +15,7 @@ object SpaceWeatherApi2 {
     private const val url = "https://storage.googleapis.com/sun-explorer.appspot.com/"
 
     private fun createClient(): HttpClient {
-        return HttpClient(CIO) {
+        return HttpClient(OkHttp) {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(json)
             }
