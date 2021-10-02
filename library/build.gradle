@@ -1,8 +1,11 @@
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+
+group = 'com.github.v170nix'
 
 android {
     compileSdkVersion 31
@@ -50,9 +53,31 @@ android {
         exclude "META-INF/AL2.0"
         exclude "META-INF/LGPL2.1"
     }
+}
 
-    kapt {
-        generateStubs = true
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'com.github.v170nix'
+                artifactId = 'arwix-spaceweather-library'
+                version = '3.00'
+            }
+            // Creates a Maven publication called “debug”.
+//            debug(MavenPublication) {
+//                // Applies the component for the debug build variant.
+//                from components.debug
+//
+//                groupId = 'com.github.v170nix:arwix-spaceweather-library'
+//                artifactId = 'final-debug'
+//                version = '1.0'
+//            }
+        }
     }
 }
 
@@ -74,7 +99,7 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:2.7.0-rc01"
 
     implementation "androidx.room:room-runtime:2.3.0"
-    annotationProcessor "androidx.room:room-compiler:2.3.0"
+//    annotationProcessor "androidx.room:room-compiler:2.3.0"
     kapt "androidx.room:room-compiler:2.3.0"
     implementation "androidx.room:room-ktx:2.3.0"
 
